@@ -9,7 +9,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   templateUrl: './angular-guider.component.html',
   styleUrls: ['./angular-guider.component.scss']
 })
-export class AngularInterfaceGuideComponent {
+export class AngularGuiderComponent {
   @Input({ required: true }) top!: string;
   @Input({ required: true }) left!: string;
   @Input({ required: true }) width!: string;

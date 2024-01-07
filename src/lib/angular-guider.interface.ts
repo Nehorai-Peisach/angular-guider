@@ -1,4 +1,4 @@
-export interface AngularInterfaceGuideStep {
+export interface AngularGuiderStep {
   elementId: string;
   message?: string;
   clickable?: boolean

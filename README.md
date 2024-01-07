@@ -26,18 +26,18 @@ To use the Angular Guider Service in your Angular application, follow these step
 npm install --save angular-guider
 ```
 
-### 2. Inject the `AngularInterfaceGuideService` where you need to use it:
+### 2. Inject the `AngularGuiderService` where you need to use it:
 
 ```typescript
-import { AngularInterfaceGuideService } from 'angular-guider';
+import { AngularGuiderService } from 'angular-guider';
 
-constructor(private interfaceGuideService: AngularInterfaceGuideService) { }
+constructor(private guiderService: AngularGuiderService) { }
 ```
 
 ### 3. Add the following CSS rule to your global styles (e.g., styles.css or styles.scss) to ensure a focused experience during the guide:
 
 ```css
-.guide-active {
+.guider-active {
     height: 100vh;
     width: 100vw;
     overflow: hidden !important;
@@ -50,62 +50,62 @@ Feel free to customize the CSS rule based on your application's styling needs.
 
 ## Usage
 
-### 1. Set up Guide Steps
-Before starting the guide, set up an array of guide steps:
+### 1. Set up Guider Steps
+Before starting the guider, set up an array of guider steps:
 
 ```typescript
-const guideSteps = [
+const guiderSteps = [
   { elementId: 'element1', message: 'This is the first step.' },
   // Add more steps as needed
 ];
 ```
 
-### 2. Initialize Guide Steps
-Set the guide steps using the setSteps method:
+### 2. Initialize Guider Steps
+Set the guider steps using the setSteps method:
 
 ```typescript
-this.interfaceGuideService.setSteps(guideSteps);
+this.guideService.setSteps(guideSteps);
 ```
 
-### 3. Start the Guide
-Start the guide at a specific index or use the default start:
+### 3. Start the Guider
+Start the guider at a specific index or use the default start:
 
 ```typescript
-// Start the guide at the first step
-this.interfaceGuideService.startGuide();
+// Start the guider at the first step
+this.guideService.startGuide();
 
-// Start the guide at a specific index
-this.interfaceGuideService.startGuideAt(2);
+// Start the guider at a specific index
+this.guideService.startGuideAt(2);
 ```
 
-### 4. Next and End Guide
-Navigate to the next step or end the guide:
+### 4. Next and End Guider
+Navigate to the next step or end the guider:
 
 ```typescript
 // Move to the next step
-this.interfaceGuideService.nextStep();
+this.guideService.nextStep();
 
-// End the guide
-this.interfaceGuideService.endGuide();
+// End the guider
+this.guideService.endGuide();
 ```
 ## Angular Guider Step Interface
 
-The `AngularInterfaceGuideStep` interface is used to define the properties of each step in the Angular Guider. Below is a table summarizing the available properties:
+The `AngularGuiderStep` interface is used to define the properties of each step in the Angular Guider. Below is a table summarizing the available properties:
 
 | Property          | Type      | Description                                                                                  |
 | ----------------- | --------- | -------------------------------------------------------------------------------------------- |
 | `elementId`       | `string`  | (Required) The HTML element's ID associated with the step.                                   |
 | `message`         | `string`  | (Optional) Message or instructions linked with the step.                                     |
 | `clickable`       | `boolean` | (Optional) Indicates whether the element's area is clickable.                                |
-| `hideButtons`     | `boolean` | (Optional) Indicates whether to hide the guide buttons.                                      |
+| `hideButtons`     | `boolean` | (Optional) Indicates whether to hide the guider buttons.                                      |
 | `disableShadedArea`  | `boolean` | (Optional) Indicates whether to disable interaction with the shaded area during this step.   |
 
 ### Example Usage:
 
 ```typescript
-import { AngularInterfaceGuideStep } from 'angular-guider';
+import { AngularGuiderStep } from 'angular-guider';
 
-const step: AngularInterfaceGuideStep = {
+const step: AngularGuiderStep = {
   elementId: 'exampleElement',
   message: 'Click on this element to proceed.',
   clickable: true,
@@ -122,12 +122,12 @@ Feel free to customize the example usage based on your specific implementation.
 
 // Import necessary modules and services
 import { Component, OnInit } from '@angular/core';
-import { AngularInterfaceGuideService } from 'angular-guider';
+import { AngularGuiderService } from 'angular-guider';
 
 @Component({
   selector: 'app-example',
   template: `
-    <button (click)="startGuide()">Start Guide</button>
+    <button (click)="startGuide()">Start Guider</button>
 
     <!-- Your application content -->
     <div id="my-example-step1">Element 1</div>
@@ -136,10 +136,10 @@ import { AngularInterfaceGuideService } from 'angular-guider';
   `,
 })
 export class ExampleComponent implements OnInit {
-  constructor(private interfaceGuideService: AngularInterfaceGuideService) {}
+  constructor(private guideService: AngularGuiderService) {}
 
   ngOnInit(): void {
-    // Set up guide steps
+    // Set up guider steps
     const guideSteps = [
       { 
         elementId: 'my-example-step1',
@@ -155,19 +155,19 @@ export class ExampleComponent implements OnInit {
         elementId: 'my-example-step2',
         message: 'This is the second step.',
         clickable: true, // Enables clickability for the element, making its area interactive
-        hideButtons: true // Controls whether the guide buttons should be hidden
+        hideButtons: true // Controls whether the guider buttons should be hidden
 
       },
       // Add more steps as needed
     ];
 
-    // Initialize guide steps
-    this.interfaceGuideService.setSteps(guideSteps);
+    // Initialize guider steps
+    this.guideService.setSteps(guideSteps);
   }
 
-  // Start the guide
+  // Start the guider
   startGuide(): void {
-    this.interfaceGuideService.startGuide();
+    this.guideService.startGuide();
   }
 }
 ```

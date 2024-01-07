@@ -1,15 +1,15 @@
 import { ApplicationRef, ComponentFactoryResolver, ComponentRef, Injectable, Injector, NgZone, RendererFactory2 } from '@angular/core';
-import { AngularInterfaceGuideStep } from './angular-guider.interface';
-import { AngularInterfaceGuideComponent } from './angular-guider.component';
+import { AngularGuiderStep } from './angular-guider.interface';
+import { AngularGuiderComponent } from './angular-guider.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AngularInterfaceGuideService {
+export class AngularGuiderService {
   private index: number = 0;
-  private steps: AngularInterfaceGuideStep[] = [];
+  private steps: AngularGuiderStep[] = [];
 
-  private componentRef!: ComponentRef<AngularInterfaceGuideComponent>
+  private componentRef!: ComponentRef<AngularGuiderComponent>
   private resizeListener: (() => void) | null = null;
 
   constructor(
@@ -21,7 +21,7 @@ export class AngularInterfaceGuideService {
   ) {
   }
 
-  setSteps(steps: AngularInterfaceGuideStep[]): void {
+  setSteps(steps: AngularGuiderStep[]): void {
     this.steps = steps;
   }
 
@@ -42,7 +42,7 @@ export class AngularInterfaceGuideService {
       if (element) {
         const position = this.getElementPosition(element);
         // Dynamically create the Angular component
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(AngularInterfaceGuideComponent);
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(AngularGuiderComponent);
         this.componentRef = componentFactory.create(this.injector);
 
 
@@ -76,7 +76,7 @@ export class AngularInterfaceGuideService {
 
           // Add CSS to HTML element if the component is visible
           if (isComponentVisible) {
-            this.rendererFactory.createRenderer(null, null).addClass(document.documentElement, 'guide-active');
+            this.rendererFactory.createRenderer(null, null).addClass(document.documentElement, 'guider-active');
           }
         });
       } else {
@@ -110,7 +110,7 @@ export class AngularInterfaceGuideService {
 
     // Detach and destroy the dynamically created Angular component
     if (this.appRef.components.length > 0) {
-      this.rendererFactory.createRenderer(null, null).removeClass(document.documentElement, 'guide-active');
+      this.rendererFactory.createRenderer(null, null).removeClass(document.documentElement, 'guider-active');
 
       this.componentRef.destroy();
     }
@@ -125,7 +125,7 @@ export class AngularInterfaceGuideService {
     return { top: rect.top, left: rect.left };
   }
 
-  private setupResizeListener(element: HTMLElement, componentInstance: AngularInterfaceGuideComponent): void {
+  private setupResizeListener(element: HTMLElement, componentInstance: AngularGuiderComponent): void {
     // Remove any existing resize listener
     if (this.resizeListener) {
       window.removeEventListener('resize', this.resizeListener);
