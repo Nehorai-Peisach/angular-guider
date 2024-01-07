@@ -1,0 +1,126 @@
+.angular-guider-wrapper {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    pointer-events: none;
+    z-index: 9999;
+
+    .angular-guider-shade-left,
+    .angular-guider-complete-shade-right,
+    .angular-guider-middle .angular-guider-shade-up,
+    .angular-guider-middle .angular-guider-complete-shade-down {
+        background-color: rgba(0, 0, 0, 0.75);
+        // backdrop-filter: blur(3px);
+        pointer-events: all;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .angular-guider-middle {
+        display: flex;
+        flex-direction: column;
+        pointer-events: none;
+
+        .angular-guider-content-wrapper {
+            display: grid;
+
+            &,
+            &>* {
+                grid-area: 1/1;
+            }
+
+            .angular-guider-border {
+                pointer-events: none;
+                position: absolute;
+                transform: translate(-3px, -3px);
+                border: 3px solid rgb(84, 120, 240);
+                border-radius: 10px;
+                z-index: 1;
+            }
+        }
+
+        .angular-guider-message-wrapper {
+            position: relative;
+            z-index: 1;
+
+            .angular-guider-message {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                position: absolute;
+                pointer-events: all;
+                background-color: white;
+                padding: 20px;
+                margin: 10px;
+
+                .angular-guider-buttons {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 5px;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        background-color: rgb(65, 65, 65);
+                        outline: none;
+                        border: none;
+                        cursor: pointer;
+                        width: 120px;
+
+                        &,
+                        * {
+                            transition: all .3s;
+                            color: white;
+                        }
+
+                        &:hover {
+                            background-color: gray;
+                        }
+
+                        &:active {
+                            opacity: .75;
+                        }
+
+                        &.angular-guider-complete-button {
+                            background-color: rgb(21 171 21);
+
+                            &:hover {
+                                background-color: rgb(27, 184, 27);
+                            }
+                        }
+
+                        &.angular-guider-close-button {
+                            background: none;
+                            width: fit-content;
+                            padding: 0;
+                            transform: translate(10px, -10px);
+
+                            * {
+                                color: rgb(255, 125, 125);
+                            }
+
+                            &:hover {
+
+                                &,
+                                * {
+                                    color: rgb(206, 31, 31);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

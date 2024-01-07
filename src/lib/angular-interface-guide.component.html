@@ -1,0 +1,44 @@
+<div class="angular-guider-wrapper">
+    <div (click)="emitNext()" class="angular-guider-shade-left" [style.width]="left" [style.min-width]="left">
+    </div>
+    <div class="angular-guider-middle" [style.min-width]="width">
+        <div (click)="emitNext()" class="angular-guider-shade-up" [style.height]="top"
+            [style.min-height]="top"></div>
+        <div class="angular-guider-content-wrapper" [style.min-height]="height">
+            <div class="angular-guider-content" [style.pointer-events]="clickable ? 'none' : 'auto'">
+            </div>
+            <div class="angular-guider-border" [style.width]="width" [style.height]="height"></div>
+            <div *ngIf="message" class="angular-guider-message-wrapper">
+                <div id="angular-guider-message" class="angular-guider-message">
+                    <div class="angular-guider-buttons">
+                        <div></div>
+                        <button (click)="emitClose()" class="angular-guider-close-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+                                <path fill="currentColor"
+                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="angular-guider-message-content" [innerHTML]="innerHTML"></div>
+                    <div *ngIf="!hideButtons" class="angular-guider-buttons">
+                        <button (click)="emitPrev()" *ngIf="!isFirst"><svg xmlns="http://www.w3.org/2000/svg"
+                                height="16" width="10" viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                    d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+                            </svg>Backward</button>
+                        <div></div>
+                        <button (click)="emitNext(true)" *ngIf="!isLast">Forward<svg xmlns="http://www.w3.org/2000/svg"
+                                height="16" width="10" viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                    d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" />
+                            </svg> </button>
+                        <button class="angular-guider-complete-button" (click)="emitClose()"
+                            *ngIf="isLast">Complete!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div (click)="emitNext()" class="angular-guider-complete-shade-down"></div>
+    </div>
+    <div (click)="emitNext()" class="angular-guider-complete-shade-right"></div>
+</div>
