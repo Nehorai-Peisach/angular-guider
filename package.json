@@ -7,6 +7,11 @@
     "type": "git",
     "url": "git+https://github.com/Nehorai-Peisach/angular-guider.git"
   },
+  "exports": {
+    "./lib": {
+      "default": "./lib/public-api.ts"
+    }
+  },
   "keywords": [
     "angular",
     "guide",

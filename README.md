@@ -26,7 +26,18 @@ To use the Angular Guider Service in your Angular application, follow these step
 npm install --save angular-guider
 ```
 
-### 2. Inject the `AngularGuiderService` where you need to use it:
+### 2. Import the `AngularGuiderService` and provide it in your module:
+
+```typescript
+import { AngularGuiderService } from 'angular-guider';
+
+@NgModule({
+  providers: [AngularGuiderService]
+})
+```
+
+
+### 3. Inject the `AngularGuiderService` where you need to use it:
 
 ```typescript
 import { AngularGuiderService } from 'angular-guider';
@@ -34,7 +45,7 @@ import { AngularGuiderService } from 'angular-guider';
 constructor(private guiderService: AngularGuiderService) { }
 ```
 
-### 3. Add the following CSS rule to your global styles (e.g., styles.css or styles.scss) to ensure a focused experience during the guide:
+### 4. Add the following CSS rule to your global styles (e.g., styles.css or styles.scss) to ensure a focused experience during the guide:
 
 ```css
 .guider-active {

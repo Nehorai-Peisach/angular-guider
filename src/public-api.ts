@@ -1,2 +1,2 @@
-export * from './lib/angular-guider.interface';
-export * from './lib/angular-guider.service';
+export { AngularGuiderStep } from './lib/angular-guider.interface';
+export { AngularGuiderService } from './lib/angular-guider.service';
