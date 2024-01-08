@@ -5,7 +5,7 @@
   "description": "The Angular Guider Service is a utility service in Angular that provides functionality to create a guided interface experience, helping users navigate through specific elements on your application.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nehorai-Peisach/angular-guider.git"
+    "url": "https://github.com/Nehorai-Peisach/angular-guider"
   },
   "exports": {
     "./lib": {
