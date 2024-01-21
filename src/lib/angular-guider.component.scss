@@ -38,9 +38,8 @@
             .angular-guider-border {
                 pointer-events: none;
                 position: absolute;
-                transform: translate(-3px, -3px);
-                border: 3px solid rgb(84, 120, 240);
-                border-radius: 10px;
+                border: 3px solid;
+                // border-radius: 10px;
                 z-index: 1;
             }
         }
@@ -58,6 +57,7 @@
                 background-color: white;
                 padding: 20px;
                 margin: 10px;
+                min-width: 300px;
 
                 .angular-guider-buttons {
                     display: flex;

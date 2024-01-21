@@ -1,4 +1,4 @@
-import { ApplicationRef, ComponentFactoryResolver, ComponentRef, Injectable, Injector, NgZone, RendererFactory2 } from '@angular/core';
+import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EventEmitter, Injectable, Injector, NgZone, Output, RendererFactory2 } from '@angular/core';
 import { AngularGuiderStep } from './angular-guider.interface';
 import { AngularGuiderComponent } from './angular-guider.component';
 
@@ -11,6 +11,10 @@ export class AngularGuiderService {
 
   private componentRef!: ComponentRef<AngularGuiderComponent>
   private resizeListener: (() => void) | null = null;
+
+  @Output() onNext = new EventEmitter<number>();
+  @Output() onPrev = new EventEmitter<number>();
+  @Output() onClose = new EventEmitter<any>();
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -27,7 +31,6 @@ export class AngularGuiderService {
 
   startGuideAt(index: number) {
     setTimeout(() => {
-
       this.index = index;
 
       if (this.index < 0 || this.index >= this.steps.length) {
@@ -35,7 +38,7 @@ export class AngularGuiderService {
         return;
       }
 
-      const { elementId, message, clickable, hideButtons, disableShadedArea } = this.steps[this.index];
+      const { elementId, message, clickable, hideButtons, disableShadedArea, borderColor } = this.steps[this.index];
 
       const element = document.getElementById(elementId);
 
@@ -48,18 +51,20 @@ export class AngularGuiderService {
 
         // Set input properties for the component
         this.componentRef.instance.top = `${position.top}px`;
+        this.componentRef.instance.left = `${position.left}px`;
         this.componentRef.instance.width = `${element.offsetWidth}px`;
         this.componentRef.instance.height = `${element.offsetHeight}px`;
         this.componentRef.instance.message = message || '';
         this.componentRef.instance.clickable = !!clickable;
         this.componentRef.instance.hideButtons = !!hideButtons;
         this.componentRef.instance.disableShadedArea = !!disableShadedArea;
+        this.componentRef.instance.borderColor = borderColor || '#5478f0';
 
         this.componentRef.instance.isFirst = this.index === 0;
         this.componentRef.instance.isLast = this.index === this.steps.length - 1;
         this.componentRef.instance.next.subscribe(() => this.nextStep());
         this.componentRef.instance.prev.subscribe(() => this.prevStep());
-        this.componentRef.instance.close.subscribe(() => this.endGuide());
+        this.componentRef.instance.close.subscribe(() => this.endGuide(true));
 
         // Attach the component to the DOM
         this.appRef.attachView(this.componentRef.hostView);
@@ -90,20 +95,22 @@ export class AngularGuiderService {
   }
 
   nextStep(): void {
-    this.endGuide();
     if (this.index + 1 < this.steps.length) {
+      this.endGuide();
       this.startGuideAt(++this.index);
+      this.onNext.emit(this.index);
     }
   };
 
   prevStep(): void {
-    this.endGuide();
     if (this.index - 1 >= 0) {
+      this.endGuide();
       this.startGuideAt(--this.index);
+      this.onPrev.emit(this.index);
     }
   };
 
-  endGuide(): void {
+  endGuide(end?: boolean): void {
     if (this.resizeListener) {
       window.removeEventListener('resize', this.resizeListener);
     }
@@ -114,6 +121,9 @@ export class AngularGuiderService {
 
       this.componentRef.destroy();
     }
+
+    if (end)
+      this.onClose.emit();
   }
 
 

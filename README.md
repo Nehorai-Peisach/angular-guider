@@ -1,6 +1,6 @@
 # Angular Guider Service
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
 
 ## Overview
 
@@ -26,7 +26,7 @@ To use the Angular Guider Service in your Angular application, follow these step
 npm install --save angular-guider
 ```
 
-### 2. Import the `AngularGuiderService` and provide it in your module:
+### 2. Import the AngularGuiderService and provide it in your module:
 
 ```typescript
 import { AngularGuiderService } from 'angular-guider';
@@ -36,8 +36,7 @@ import { AngularGuiderService } from 'angular-guider';
 })
 ```
 
-
-### 3. Inject the `AngularGuiderService` where you need to use it:
+### 3. Inject the AngularGuiderService where you need to use it:
 
 ```typescript
 import { AngularGuiderService } from 'angular-guider';
@@ -54,62 +53,72 @@ constructor(private guiderService: AngularGuiderService) { }
     overflow: hidden !important;
 }
 ```
-
 This CSS rule will be applied when the guide is active, preventing scrolling and ensuring a focused view for users during the interface walkthrough.
 
 Feel free to customize the CSS rule based on your application's styling needs.
 
 ## Usage
 
-### 1. Set up Guider Steps
-Before starting the guider, set up an array of guider steps:
+### Input
 
-```typescript
-const guiderSteps = [
-  { elementId: 'element1', message: 'This is the first step.' },
-  // Add more steps as needed
-];
-```
+The Angular Guider Service provides the following input methods for controlling the guide:
 
-### 2. Initialize Guider Steps
-Set the guider steps using the setSteps method:
+1. **`setSteps(steps: AngularGuiderStep[]): void`**
+   - **Description:** Sets up an array of guider steps that define the sequence of steps in the guided interface walkthrough.
+   - **Parameters:**
+     - `steps` (type: `AngularGuiderStep[]`): An array of `AngularGuiderStep` objects, where each object represents a step in the guided interface.
 
-```typescript
-this.guideService.setSteps(guideSteps);
-```
+2. **`startGuide(): void`**
+   - **Description:** Initiates the guider, starting from the default index (usually the first step).
+   - **Usage:** Call this method to begin the guided interface experience.
 
-### 3. Start the Guider
-Start the guider at a specific index or use the default start:
+3. **`startGuideAt(index: number): void`**
+   - **Description:** Initiates the guider, starting from the specified index in the array of guider steps.
+   - **Parameters:**
+     - `index` (type: `number`): The index at which to start the guider.
+   - **Usage:** Call this method to start the guider at a specific step.
 
-```typescript
-// Start the guider at the first step
-this.guideService.startGuide();
+4. **`nextStep(): void`**
+   - **Description:** Moves the guider to the next step in the sequence.
+   - **Usage:** Call this method to progress to the next step in the guided interface.
 
-// Start the guider at a specific index
-this.guideService.startGuideAt(2);
-```
+5. **`prevStep(): void`**
+   - **Description:** Moves the guider to the previous step in the sequence.
+   - **Usage:** Call this method to go back to the previous step in the guided interface.
 
-### 4. Next and End Guider
-Navigate to the next step or end the guider:
+6. **`endGuide(): void`**
+   - **Description:** Ends the guider, terminating the guided interface experience.
+   - **Usage:** Call this method to conclude the guided interface walkthrough.
 
-```typescript
-// Move to the next step
-this.guideService.nextStep();
+### Output
 
-// End the guider
-this.guideService.endGuide();
-```
+Subscribe to the following events to be notified of guider actions:
+
+1. **`onNext(): Observable<void>`**
+   - **Description:** Emits when the user successfully navigates to the next step in the guided interface.
+   - **Usage:** Subscribe to this event to perform additional actions when the user advances to the next step.
+
+2. **`onPrev(): Observable<void>`**
+   - **Description:** Emits when the user successfully navigates to the previous step in the guided interface.
+   - **Usage:** Subscribe to this event to perform additional actions when the user goes back to the previous step.
+
+3. **`onClose(): Observable<void>`**
+   - **Description:** Emits when the user closes the guider, either by reaching the end or manually ending the guide.
+   - **Usage:** Subscribe to this event to perform cleanup or additional actions when the user closes the guided interface.
+
+
 ## Angular Guider Step Interface
 
-The `AngularGuiderStep` interface is used to define the properties of each step in the Angular Guider. Below is a table summarizing the available properties:
+The `AngularGuiderStep` interface is used to define the properties of each step in the Angular Guider. Each step represents a specific point in the guided interface walkthrough.
 
-| Property          | Type      | Description                                                                                  |
-| ----------------- | --------- | -------------------------------------------------------------------------------------------- |
-| `elementId`       | `string`  | (Required) The HTML element's ID associated with the step.                                   |
-| `message`         | `string`  | (Optional) Message or instructions linked with the step.                                     |
-| `clickable`       | `boolean` | (Optional) Indicates whether the element's area is clickable.                                |
-| `hideButtons`     | `boolean` | (Optional) Indicates whether to hide the guider buttons.                                      |
-| `disableShadedArea`  | `boolean` | (Optional) Indicates whether to disable interaction with the shaded area during this step.   |
+| Property             | Type      | Description                                                                                     |
+| -------------------- | --------- | ----------------------------------------------------------------------------------------------- |
+| `elementId`          | `string`  | (Required) The HTML element's ID associated with the step.                                      |
+| `message`            | `string`  | (Optional) Message or instructions linked with the step.                                        |
+| `clickable`          | `boolean` | (Optional) Indicates whether the element's area is clickable.                                   |
+| `hideButtons`        | `boolean` | (Optional) Indicates whether to hide the guider buttons during this step.                       |
+| `disableShadedArea`  | `boolean` | (Optional) Indicates whether to disable interaction with the shaded area during this step.      |
+| `borderColor`        | `string`  | (Optional) The color of the border associated with this step. Default is `'#5478f0'`.           |
 
 ### Example Usage:
 
@@ -121,13 +130,14 @@ const step: AngularGuiderStep = {
   message: 'Click on this element to proceed.',
   clickable: true,
   hideButtons: true,
-  disableShadedArea: true
+  disableShadedArea: true,
+  borderColor: '#ff0000' // Customize the border color for this step
 };
 ```
 Feel free to customize the example usage based on your specific implementation.
 
-
 ## Component Examples
+
 ```typescript
 //app-app-example.component.ts
 
@@ -147,7 +157,7 @@ import { AngularGuiderService } from 'angular-guider';
   `,
 })
 export class ExampleComponent implements OnInit {
-  constructor(private guideService: AngularGuiderService) {}
+  constructor(private guiderService: AngularGuiderService) {}
 
   ngOnInit(): void {
     // Set up guider steps
@@ -165,20 +175,19 @@ export class ExampleComponent implements OnInit {
       { 
         elementId: 'my-example-step2',
         message: 'This is the second step.',
-        clickable: true, // Enables clickability for the element, making its area interactive
-        hideButtons: true // Controls whether the guider buttons should be hidden
-
+        clickable: true,
+        hideButtons: true
       },
       // Add more steps as needed
     ];
 
     // Initialize guider steps
-    this.guideService.setSteps(guideSteps);
+    this.guiderService.setSteps(guideSteps);
   }
 
   // Start the guider
   startGuide(): void {
-    this.guideService.startGuide();
+    this.guiderService.startGuide();
   }
 }
 ```
@@ -186,9 +195,4 @@ export class ExampleComponent implements OnInit {
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-##
 Feel free to modify the content based on your specific needs and add more sections if required.
-
-
-
-

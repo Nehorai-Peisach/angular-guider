@@ -1,6 +1,6 @@
 {
   "name": "angular-guider",
-  "version": "16.2.0",
+  "version": "16.1.2",
   "author": "Nehorai Peisach",
   "description": "The Angular Guider Service is a utility service in Angular that provides functionality to create a guided interface experience, helping users navigate through specific elements on your application.",
   "repository": {
@@ -25,8 +25,8 @@
     "instructions"
   ],
   "peerDependencies": {
-    "@angular/common": "^16.2.0",
-    "@angular/core": "^16.2.0"
+    "@angular/common": "^16.1.0",
+    "@angular/core": "^16.1.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

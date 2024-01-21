@@ -2,12 +2,12 @@
     <div (click)="emitNext()" class="angular-guider-shade-left" [style.width]="left" [style.min-width]="left">
     </div>
     <div class="angular-guider-middle" [style.min-width]="width">
-        <div (click)="emitNext()" class="angular-guider-shade-up" [style.height]="top"
-            [style.min-height]="top"></div>
+        <div (click)="emitNext()" class="angular-guider-shade-up" [style.height]="top" [style.min-height]="top"></div>
         <div class="angular-guider-content-wrapper" [style.min-height]="height">
             <div class="angular-guider-content" [style.pointer-events]="clickable ? 'none' : 'auto'">
             </div>
-            <div class="angular-guider-border" [style.width]="width" [style.height]="height"></div>
+            <div class="angular-guider-border" [style.width]="borderWidth" [style.height]="borderHeight"
+                [style.borderColor]="borderColor"></div>
             <div *ngIf="message" class="angular-guider-message-wrapper">
                 <div id="angular-guider-message" class="angular-guider-message">
                     <div class="angular-guider-buttons">

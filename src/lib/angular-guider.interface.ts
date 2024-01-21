@@ -3,5 +3,6 @@ export interface AngularGuiderStep {
   message?: string;
   clickable?: boolean
   hideButtons?: boolean,
-  disableShadedArea?: boolean
+  disableShadedArea?: boolean,
+  borderColor?: string
 }
